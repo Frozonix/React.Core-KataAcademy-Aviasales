@@ -5,7 +5,7 @@ import { dataObj } from '../types/dataType'
 // eslint-disable-next-line
 export const getData = createAsyncThunk('tickets/getData', async (_, { rejectWithValue }) => {
   const getUrl = await (await fetch('https://aviasales-test-api.kata.academy/search')).json()
-  const url = `https://aviasales-test-api.kata.academy/ttickets?searchId=${getUrl.searchId}`
+  const url = `https://aviasales-test-api.kata.academy/tickets?searchId=${getUrl.searchId}`
 
   try {
     const responce = await fetch(url)
