@@ -14,30 +14,32 @@ export function TicketCard({ data }: I_TicketCardProps) {
 
   const getPrice = (price: number) =>
     price.toString().length === 5
-      ? price.toString().slice(0, 2) + ' ' + price.toString().slice(2)
-      : price.toString().slice(0, 3) + ' ' + price.toString().slice(3)
+      ? `${price.toString().slice(0, 2)} ${price.toString().slice(2)}`
+      : `${price.toString().slice(0, 3)} ${price.toString().slice(3)}`
 
   const getDuration = (time: number) => {
     const h = Math.floor(time / 60)
     let m: string | number = time - 60 * h
-    m = m.toString().length === 1 ? '0' + m : m
+    m = m.toString().length === 1 ? `0${m}` : m
     return `${h}ч ${m}м`
   }
 
   const getTime = (date: string, duration: number) => {
     const startDate = new Date(date)
 
-    const firstTime: string =
-      (startDate.getHours().toString().length === 1 ? '0' + startDate.getHours() : startDate.getHours()).toString() +
-      ':' +
-      (startDate.getMinutes().toString().length === 1 ? '0' + startDate.getMinutes() : startDate.getMinutes())
+    const firstTime = `${(startDate.getHours().toString().length === 1
+      ? `0${startDate.getHours()}`
+      : startDate.getHours()
+    ).toString()}:${
+      startDate.getMinutes().toString().length === 1 ? `0${startDate.getMinutes()}` : startDate.getMinutes()
+    }`
 
     const endDate = new Date(Date.parse(startDate.toString()) + duration * 60 * 1000)
 
-    const secondTime: string =
-      (endDate.getHours().toString().length === 1 ? '0' + endDate.getHours() : endDate.getHours()).toString() +
-      ':' +
-      (endDate.getMinutes().toString().length === 1 ? '0' + endDate.getMinutes() : endDate.getMinutes())
+    const secondTime = `${(endDate.getHours().toString().length === 1
+      ? `0${endDate.getHours()}`
+      : endDate.getHours()
+    ).toString()}:${endDate.getMinutes().toString().length === 1 ? `0${endDate.getMinutes()}` : endDate.getMinutes()}`
     return `${firstTime} – ${secondTime}`
   }
 

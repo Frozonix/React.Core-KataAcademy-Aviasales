@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { filterClickHandler } from '../../store/filterSlice'
 
@@ -22,7 +23,8 @@ export function Filter() {
                   checked={filterState[0]}
                   onChange={(e) => clickEvent(e.target as Element)}
                 />
-                <label htmlFor="filter-1"></label>
+                {/* eslint-disable-next-line */}
+                <label htmlFor="filter-1" />
                 <span>Все</span>
               </li>
             </label>
@@ -34,7 +36,8 @@ export function Filter() {
                   checked={filterState[1]}
                   onChange={(e) => clickEvent(e.target as Element)}
                 />
-                <label htmlFor="filter-2"></label>
+                {/* eslint-disable-next-line */}
+                <label htmlFor="filter-2" />
                 <span>Без пересадок</span>
               </li>
             </label>
@@ -46,7 +49,8 @@ export function Filter() {
                   checked={filterState[2]}
                   onChange={(e) => clickEvent(e.target as Element)}
                 />
-                <label htmlFor="filter-3"></label>
+                {/* eslint-disable-next-line */}
+                <label htmlFor="filter-3" />
                 <span>1 пересадка</span>
               </li>
             </label>
@@ -58,7 +62,8 @@ export function Filter() {
                   checked={filterState[3]}
                   onChange={(e) => clickEvent(e.target as Element)}
                 />
-                <label htmlFor="filter-4"></label>
+                {/* eslint-disable-next-line */}
+                <label htmlFor="filter-4" />
                 <span>2 пересадки</span>
               </li>
             </label>
@@ -70,7 +75,8 @@ export function Filter() {
                   checked={filterState[4]}
                   onChange={(e) => clickEvent(e.target as Element)}
                 />
-                <label htmlFor="filter-5"></label>
+                {/* eslint-disable-next-line */}
+                <label htmlFor="filter-5" />
                 <span>3 пересадки</span>
               </li>
             </label>

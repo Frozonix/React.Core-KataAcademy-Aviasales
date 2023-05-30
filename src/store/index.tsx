@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+
 import tabsReducer from './tabsSlice'
 import filterReducer from './filterSlice'
 import ticketsReducer from './ticketsSlice'

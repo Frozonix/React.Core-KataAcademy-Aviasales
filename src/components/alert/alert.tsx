@@ -6,7 +6,7 @@ interface I_AlertProps {
   text: string
 }
 
-export const Alert = ({ type, text }: I_AlertProps) => {
+export function Alert({ type, text }: I_AlertProps) {
   const className = type === 'error' ? 'error-alert' : 'info-alert'
   const information = type === 'error' ? <h4>{text}</h4> : <h3>{text}</h3>
   return <div className={className}>{information}</div>

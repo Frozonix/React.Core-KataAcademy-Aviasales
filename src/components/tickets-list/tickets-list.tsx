@@ -4,9 +4,7 @@ import './tickets-list.scss'
 import { TicketCard } from '../ticket-card/ticket-card'
 import { Loading } from '../loading/loading'
 import { Alert } from '../alert/alert'
-import { getData } from '../../store/ticketsSlice'
-import { allTickets, notAllTickets } from '../../store/ticketsSlice'
-
+import { getData, allTickets, notAllTickets } from '../../store/ticketsSlice'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { dataObj } from '../../types/dataType'
 
@@ -27,6 +25,7 @@ export function TicketsList() {
     if (!error) {
       get()
     }
+    /* eslint-disable-next-line */
   }, [])
 
   useEffect(() => {
@@ -40,50 +39,45 @@ export function TicketsList() {
     } else {
       dispatch(notAllTickets([filterState, active]))
     }
-  }, [filterState, tabsState])
+  }, [filterState, tabsState, dispatch])
 
   function partTickets() {
     if (status === 'loading') {
       return <Loading />
-    } else if (status === 'ok') {
-      if (viewTickets.length !== 0) {
-        return viewTickets.map((item: any) => {
-          return (
-            <TicketCard
-              data={item}
-              key={
-                'avia-' +
-                Math.random().toString(36).substring(2).toString() +
-                Math.random().toString(36).substring(2).toString()
-              }
-            />
-          )
-        })
-      } else {
-        return <Alert type="info" text="Рейсов, подходящих под заданные фильтры, не найдено" />
-      }
-    } else {
-      return <Alert type="error" text={error.toString()} />
     }
+    if (status === 'ok') {
+      if (viewTickets.length !== 0) {
+        return viewTickets.map((item: dataObj) => (
+          <TicketCard
+            data={item}
+            key={`avia-${Math.random().toString(36).substring(2).toString()}${Math.random()
+              .toString(36)
+              .substring(2)
+              .toString()}`}
+          />
+        ))
+      }
+      return <Alert type="info" text="Рейсов, подходящих под заданные фильтры, не найдено" />
+    }
+    return <Alert type="error" text={error.toString()} />
   }
-  function showPartTickets() {}
   function showBtn() {
     if (status === 'ok' && viewTickets.length !== 0) {
       return (
         <li className="tickets-load-btn-wrapper">
           <button
+            type="button"
             className="tickets-load-btn"
             onClick={() => {
-              setViewCounter((viewCounter) => viewCounter + 5)
+              setViewCounter((s) => s + 5)
             }}
           >
             Загрузить еще 5 билетов!
           </button>
         </li>
       )
-    } else {
-      return null
     }
+    return null
   }
 
   return (

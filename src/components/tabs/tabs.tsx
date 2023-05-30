@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { changeTabFilter } from '../../store/tabsSlice'
 import './tabs.scss'
@@ -12,6 +13,7 @@ export function Tabs() {
   return (
     <div className="tabs">
       <button
+        type="button"
         id="tabs-0"
         onClick={(e) => dispatch(changeTabFilter((e.target as Element).id))}
         className={renderActive() === 0 ? 'active' : ''}
@@ -19,6 +21,7 @@ export function Tabs() {
         САМЫЙ ДЕШЕВЫЙ
       </button>
       <button
+        type="button"
         id="tabs-1"
         onClick={(e) => dispatch(changeTabFilter((e.target as Element).id))}
         className={renderActive() === 1 ? 'active' : ''}
@@ -26,6 +29,7 @@ export function Tabs() {
         САМЫЙ БЫСТРЫЙ
       </button>
       <button
+        type="button"
         id="tabs-2"
         onClick={(e) => dispatch(changeTabFilter((e.target as Element).id))}
         className={renderActive() === 2 ? 'active' : ''}
