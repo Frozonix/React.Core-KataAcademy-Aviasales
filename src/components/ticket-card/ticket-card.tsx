@@ -1,31 +1,14 @@
 import React from 'react'
 
 import './ticket-card.scss'
-import logo from '../../img/Logo.svg'
 import logoS7 from '../../img/S7 Logo.png'
 import { dataObj } from '../../types/dataType'
-// interface I_RatedProps {
-// 	uploadState: I_loading
-// 	setUploadState: (obj: I_loading) => void
-// 	currentTab: string
-//  }
-
-//  interface I_loading {
-// 	loading: boolean
-// 	error: boolean
-// 	errorMessage?: string
-//  }
-
-//  export function RatedTab({ uploadState, setUploadState, currentTab }: I_RatedProps) {}
 
 interface I_TicketCardProps {
   data: dataObj
 }
 
 export function TicketCard({ data }: I_TicketCardProps) {
-  //   console.log(data.tickets[0].segments[0].date)
-  //   console.log(Math.random().toString(36).substring(2).toString())
-  //   console.log(data)
   const partTop = data.segments[0]
   const partBottom = data.segments[1]
 

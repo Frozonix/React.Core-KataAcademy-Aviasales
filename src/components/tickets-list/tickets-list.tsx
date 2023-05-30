@@ -13,7 +13,6 @@ import { dataObj } from '../../types/dataType'
 export function TicketsList() {
   const [viewTickets, setViewTickets] = useState<dataObj[] | []>([])
   const [viewCounter, setViewCounter] = useState<number>(5)
-  //   const [renderTickets, setRenderTickets] = useState<dataObj[] | []>([])
   const dispatch = useAppDispatch()
   const { data, status, error } = useAppSelector((state) => state.tickets)
   const filterState = useAppSelector((state) => state.filter.filter)
@@ -25,17 +24,10 @@ export function TicketsList() {
       await dispatch(getData())
       await dispatch(allTickets([filterState, active]))
     }
-    get()
-    //  dispatch(getData())
-  }, [dispatch])
-
-  //   useEffect(() => {
-  //     setViewTickets((state) => {
-  //       console.log(state)
-  //       console.log([...state, ...data.tickets.slice(viewCounter, viewCounter + 5)])
-  //       return [...state, ...data.tickets.slice(viewCounter, viewCounter + 5)]
-  //     })
-  //   }, [data, viewCounter])
+    if (!error) {
+      get()
+    }
+  }, [])
 
   useEffect(() => {
     setViewTickets([...data.tickets].slice(0, viewCounter))
@@ -44,10 +36,8 @@ export function TicketsList() {
   useEffect(() => {
     const active = tabsState.findIndex((item) => item === true)
     if (filterState[0]) {
-      console.log(active)
       dispatch(allTickets([filterState, active]))
     } else {
-      console.log(active)
       dispatch(notAllTickets([filterState, active]))
     }
   }, [filterState, tabsState])
@@ -56,14 +46,8 @@ export function TicketsList() {
     if (status === 'loading') {
       return <Loading />
     } else if (status === 'ok') {
-      // console.log(data.tickets)
-      // setViewTickets([...data.tickets])
-
       if (viewTickets.length !== 0) {
-        //   console.log(viewTickets)
-
         return viewTickets.map((item: any) => {
-          //   console.log(item)
           return (
             <TicketCard
               data={item}
@@ -91,7 +75,6 @@ export function TicketsList() {
             className="tickets-load-btn"
             onClick={() => {
               setViewCounter((viewCounter) => viewCounter + 5)
-              console.log(document.body.clientHeight)
             }}
           >
             Загрузить еще 5 билетов!
