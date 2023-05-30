@@ -1,0 +1,21 @@
+.error-alert {
+  padding: 5px 20px;
+  border-radius: 10px;
+  border: 1px solid #d8000c;
+  background-color: #ffccba;
+  margin-bottom: 40px;
+
+  h4 {
+    color: #4a4a4a;
+  }
+}
+
+.info-alert {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #2196f3;
+
+  h3 {
+    color: #4a4a4a;
+  }
+}

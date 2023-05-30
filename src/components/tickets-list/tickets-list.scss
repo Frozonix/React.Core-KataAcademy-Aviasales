@@ -1,0 +1,28 @@
+.tickets-list {
+  padding: 0;
+  list-style: none;
+}
+
+.tickets-load-btn-wrapper {
+  height: 50px;
+  background: #2196f3;
+  border-radius: 5px;
+
+  .tickets-load-btn {
+    width: 100%;
+    height: inherit;
+    background: inherit;
+    border-radius: inherit;
+    border: none;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #ffffff;
+    cursor: pointer;
+  }
+}

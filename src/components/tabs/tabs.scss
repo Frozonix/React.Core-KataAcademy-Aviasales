@@ -1,0 +1,36 @@
+.tabs {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+
+  button {
+    width: 33.333333%;
+    height: 50px;
+    background-color: white;
+    color: #4a4a4a;
+    border: 1px solid #dfe5ec;
+
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:nth-child(1) {
+    border-radius: 9px 0 0 9px;
+    border-right: none;
+  }
+  button:nth-child(3) {
+    border-radius: 0 9px 9px 0;
+    border-left: none;
+  }
+
+  button.active {
+    background-color: #2196f3;
+    color: white;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  button {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,13 @@
+.content-block {
+  display: flex;
+  flex-flow: row nowrap;
+  .tabs-tickets-wrapper {
+    flex: 1 1 100%;
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .content-block {
+    flex-flow: column nowrap;
+  }
+}
