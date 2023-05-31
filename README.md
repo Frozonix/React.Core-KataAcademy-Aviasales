@@ -1,1 +1,1 @@
-https://react-core-kata-academy-aviasales-o57e.vercel.app/
+https://react-core-kata-academy-aviasales-yyj7.vercel.app/
