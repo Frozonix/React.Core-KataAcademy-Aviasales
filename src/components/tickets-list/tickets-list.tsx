@@ -11,6 +11,7 @@ import { dataObj } from '../../types/dataType'
 export function TicketsList() {
   const [viewTickets, setViewTickets] = useState<dataObj[] | []>([])
   const [viewCounter, setViewCounter] = useState<number>(5)
+  const [fetchCounter, setFetchCounter] = useState<number>(0)
   const dispatch = useAppDispatch()
   const { data, status, error } = useAppSelector((state) => state.tickets)
   const filterState = useAppSelector((state) => state.filter.filter)
@@ -19,14 +20,20 @@ export function TicketsList() {
   useEffect(() => {
     async function get() {
       const active = tabsState.findIndex((item) => item === true)
-      await dispatch(getData())
+      await dispatch(getData(fetchCounter))
       await dispatch(allTickets([filterState, active]))
     }
-    if (!error) {
+    if (fetchCounter <= 3 && error && status === 'loading') {
+      setFetchCounter(fetchCounter + 1)
       get()
     }
+    if (!error && status === 'loading') {
+      setFetchCounter(fetchCounter + 1)
+      get()
+    }
+
     /* eslint-disable-next-line */
-  }, [])
+  }, [status, error])
 
   useEffect(() => {
     setViewTickets([...data.tickets].slice(0, viewCounter))
@@ -57,9 +64,8 @@ export function TicketsList() {
           />
         ))
       }
-      return <Alert type="info" text="Рейсов, подходящих под заданные фильтры, не найдено" />
     }
-    return <Alert type="error" text={error.toString()} />
+    return <Alert type="error" text={`${error.toString().slice(0, -1)}Превышено количество попыток подключения`} />
   }
   function showBtn() {
     if (status === 'ok' && viewTickets.length !== 0) {

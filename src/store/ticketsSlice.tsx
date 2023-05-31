@@ -3,20 +3,23 @@ import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { dataObj } from '../types/dataType'
 
 // eslint-disable-next-line
-export const getData = createAsyncThunk('tickets/getData', async (_, { rejectWithValue }) => {
+export const getData = createAsyncThunk('tickets/getData', async (counter: number, { rejectWithValue }) => {
   const getUrl = await (await fetch('https://aviasales-test-api.kata.academy/search')).json()
   const url = `https://aviasales-test-api.kata.academy/tickets?searchId=${getUrl.searchId}`
 
   try {
-    const responce = await fetch(url)
-    if (!responce.ok) {
-      throw new Error(`Server Error: ${responce.status}`)
+    if (counter < 3) {
+      const responce = await fetch(url)
+      if (!responce.ok) {
+        throw new Error(`Server Error: ${responce.status}`)
+      }
+      const data = await responce.json()
+      return data
     }
-    const data = await responce.json()
-    return data
+    throw new Error(`Server Error!`)
   } catch (err: unknown) {
     if (err instanceof Error) {
-      return rejectWithValue(err.message)
+      return rejectWithValue([err.message, counter])
     }
   }
 })
@@ -76,7 +79,7 @@ const ticketsSlice = createSlice({
 
       if (active === 0) {
         state.data.tickets = activeFirstTab(array)
-      } else if (active === 1) {
+      } else if (active === 2) {
         state.data.tickets = activeSecondTab(array)
       }
     },
@@ -84,7 +87,6 @@ const ticketsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getData.pending, (state) => {
       state.status = 'loading'
-      state.error = ''
     })
     builder.addCase(getData.fulfilled, (state, action: PayloadAction<data>) => {
       state.status = 'ok'
@@ -92,10 +94,16 @@ const ticketsSlice = createSlice({
       state.initData = action.payload.tickets
       state.error = ''
     })
-    builder.addCase(getData.rejected, (state, action: PayloadAction<unknown>) => {
-      state.status = 'rejected'
-      if (typeof action.payload === 'string') {
-        state.error = action.payload
+    /* eslint-disable-next-line */
+    // @ts-expect-error
+    builder.addCase(getData.rejected, (state, action: PayloadAction<[string, number]>) => {
+      if (action.payload[1] >= 2) {
+        state.status = 'rejected'
+      } else {
+        state.status = 'loading'
+      }
+      if (typeof action.payload[0] === 'string') {
+        state.error = `${action.payload[0]} :: ${action.payload[1]}`
       }
     })
   },
