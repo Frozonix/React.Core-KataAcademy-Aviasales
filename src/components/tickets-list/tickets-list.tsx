@@ -65,7 +65,10 @@ export function TicketsList() {
         ))
       }
     }
-    return <Alert type="error" text={`${error.toString().slice(0, -1)}Превышено количество попыток подключения`} />
+    if (status === 'rejected') {
+      return <Alert type="error" text={`${error.toString().slice(0, -1)}Превышено количество попыток подключения`} />
+    }
+    return null
   }
   function showBtn() {
     if (status === 'ok' && viewTickets.length !== 0) {
