@@ -79,7 +79,7 @@ const ticketsSlice = createSlice({
 
       if (active === 0) {
         state.data.tickets = activeFirstTab(array)
-      } else if (active === 2) {
+      } else if (active === 1) {
         state.data.tickets = activeSecondTab(array)
       }
     },

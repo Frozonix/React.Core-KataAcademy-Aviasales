@@ -33,7 +33,7 @@ export function TicketsList() {
     }
 
     /* eslint-disable-next-line */
-  }, [status, error])
+  }, [dispatch, error])
 
   useEffect(() => {
     setViewTickets([...data.tickets].slice(0, viewCounter))
@@ -64,6 +64,7 @@ export function TicketsList() {
           />
         ))
       }
+      return <Alert type="info" text="Рейсов, подходящих под заданные фильтры, не найдено" />
     }
     if (status === 'rejected') {
       return <Alert type="error" text={`${error.toString().slice(0, -1)}Превышено количество попыток подключения`} />
